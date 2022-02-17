@@ -1,13 +1,17 @@
 package domain;
 
-public class Issue {
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
+
+public class Issue  {
     private int id;
     private String nameAuthor;
-    private String label;
+    private Set label=new HashSet();
     private String nameAssignee;
     private boolean openClose; //когда true - открытый Issue, когда false - закрытый
 
-    public Issue(int id, String nameAuthor, String label, String nameAssignee, boolean openClose) {
+    public Issue(int id, String nameAuthor, HashSet label, String nameAssignee, boolean openClose) {
         this.id = id;
         this.nameAuthor = nameAuthor;
         this.label = label;
@@ -22,33 +26,22 @@ public class Issue {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getNameAuthor() {
         return nameAuthor;
     }
 
-    public void setNameAuthor(String nameAuthor) {
-        this.nameAuthor = nameAuthor;
-    }
-
-    public String getLabel() {
+    public Collection getLabel() {
         return label;
     }
-
-    public void setLabel(String label) {
-        this.label = label;
+    public void setLabel(HashSet label) {
+       this.label = label;
     }
 
     public String getNameAssignee() {
         return nameAssignee;
     }
 
-    public void setNameAssignee(String nameAssignee) {
-        this.nameAssignee = nameAssignee;
-    }
 
     public boolean isOpenClose() {
         return openClose;

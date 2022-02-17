@@ -8,25 +8,33 @@ import repository.Repository;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class ManagerTest {
-
     Repository repo = new Repository();
     Manager manager = new Manager(repo);
-    Issue problem1 = new Issue(1, "Ivanov", "dependencies", "Petrov", true);
-    Issue problem2 = new Issue(2, "Sidorov", "up-for-grabs", "Orlov", false);
-    Issue problem3 = new Issue(3, "Ivanov", "dependencies", "Petrov", true);
-    Issue problem4 = new Issue(4, "Sidorov", "up-for-grabs", "Orlov", false);
-    Issue problem5 = new Issue(5, "Ivanov", "dependencies", "Petrov", true);
-    Issue problem6 = new Issue(6, "Sidorov", "up-for-grabs", "Orlov", false);
-    Issue problem7 = new Issue(7, "Ivanov", "dependencies", "Petrov", true);
-    Issue problem8 = new Issue(8, "Sidorov", "up-for-grabs", "Orlov", false);
-    Issue problem9 = new Issue(9, "Ivanov", "dependencies", "Petrov", true);
-    Issue problem10 = new Issue(10, "Sidorov", "up-for-grabs", "Orlov", false);
-    Issue problem11 = new Issue(11, "Ivanov", "dependencies", "Petrov", true);
-    Issue problem12 = new Issue(12, "Sidorov", "up-for-grabs", "Orlov", false);
+    Set label1 = new HashSet();
+    Set label2 = new HashSet();
+    String labelName1 = "dependencies";
+    String labelName2 = "up-for-grabs";
+    String labelName3 = "Mozilla";
+    String labelName4 = "Opera";
+
+    Issue problem1 = new Issue(1, "Ivanov", (HashSet) label1, "Petrov", true);
+    Issue problem2 = new Issue(2, "Sidorov", (HashSet) label2, "Orlov", false);
+    Issue problem3 = new Issue(3, "Ivanov", (HashSet) label1, "Petrov", true);
+    Issue problem4 = new Issue(4, "Sidorov", (HashSet) label2, "Orlov", false);
+    Issue problem5 = new Issue(5, "Ivanov", (HashSet) label1, "Petrov", true);
+    Issue problem6 = new Issue(6, "Sidorov", (HashSet) label2, "Orlov", false);
+    Issue problem7 = new Issue(7, "Ivanov", (HashSet) label1, "Petrov", true);
+    Issue problem8 = new Issue(8, "Sidorov", (HashSet) label2, "Orlov", false);
+    Issue problem9 = new Issue(9, "Ivanov", (HashSet) label1, "Petrov", true);
+    Issue problem10 = new Issue(10, "Sidorov", (HashSet) label2, "Orlov", false);
+    Issue problem11 = new Issue(11, "Ivanov", (HashSet) label1, "Petrov", true);
+    Issue problem12 = new Issue(12, "Sidorov", (HashSet) label2, "Orlov", false);
     Issue[] issues = new Issue[]{problem1, problem2, problem3, problem4, problem5, problem6, problem7, problem8, problem9, problem10, problem11, problem12};
     Issue[] issuesOpen = new Issue[]{problem1, problem3, problem5, problem7, problem9, problem11};
     Issue[] issuesClose = new Issue[]{problem2, problem4, problem6, problem8, problem10, problem12};
@@ -93,6 +101,11 @@ class ManagerTest {
     void shouldShowFilterLabel() {
         Collection<Issue> problems = new ArrayList<>();
         Collection<Issue> label1Issue = new ArrayList<>();
+        label1.add(labelName1);
+        label1.add(labelName2);
+        label2.add(labelName3);
+        label2.add(labelName4);
+
         for (Issue issue : issues) {
             problems.add(issue);
         }

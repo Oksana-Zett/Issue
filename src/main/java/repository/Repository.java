@@ -4,6 +4,8 @@ import domain.Issue;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Repository {
     Collection<Issue> problems = new ArrayList<>();
@@ -28,4 +30,5 @@ public class Repository {
         }
         return null;
     }
+
 }

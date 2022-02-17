@@ -4,20 +4,24 @@ import domain.Issue;
 import exception.NotFoundException;
 import repository.Repository;
 
+import java.awt.*;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 
-public class Manager {
+public class Manager<T> {
     private Repository repo;
 
     public Manager(Repository repo) {
         this.repo = repo;
     }
 
-    public void add (Issue problem) {
+    public void add(Issue problem) {
         repo.save(problem);
     }
 
-    public void addAll (Collection <Issue> problems) {
+    public void addAll(Collection<Issue> problems) {
         repo.saveAll(problems);
     }
 
@@ -35,7 +39,32 @@ public class Manager {
 
     public Collection<Issue> showFilterLabel(String label) {
         Collection<Issue> showFilterLabel = repo.getAll();
-        showFilterLabel.removeIf(e -> e.getLabel() != label);
+        Iterator <Issue> showFilterLabelIterator = showFilterLabel.iterator();//создаем итератор
+        while(showFilterLabelIterator.hasNext()) {//до тех пор, пока в списке есть элементы
+            boolean incl = false;
+            for (Object t : showFilterLabelIterator.next().getLabel()) {
+                if (t == label) {
+                    incl = true;
+                }
+            }
+            if (incl == true) {
+            } else {
+                showFilterLabelIterator.remove();
+            }
+        }
+//        for (Issue issue : showFilterLabelInter) {
+//            boolean incl = false;
+//            for (Object t : issue.getLabel()) {
+//                if (t == label) {
+//                    incl = true;
+//                }
+//            }
+//            if (incl == true) {
+//            } else {
+//                showFilterLabelExit.remove(issue);
+//                showFilterLabelInter.add(issue);
+//            }
+//        }
         return showFilterLabel;
     }
 
@@ -52,11 +81,9 @@ public class Manager {
     }
 
     public void OpenCloseIssueById(int id, boolean status) {
-        if (repo.findById(id)==null) {
+        if (repo.findById(id) == null) {
             throw new NotFoundException("Element with id: " + id + " not found");
         }
         repo.findById(id).setOpenClose(status);
     }
-
-
 }
